@@ -1,16 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <router-view :customers="filtered ? filteredCustomers : customers" @filter-customers="filterCustomers" ></router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+
+  data() {
+    return {
+      customers: [],
+      "filteredCustomers": [],
+      filtered: false,
+      options: [],
+    }
+  },
+  methods: {
+    filterCustomers(status) {
+      this.filteredCustomers = this.customers.filter(customer => customer.status === status);
+      this.filtered = true;
+      if (status === 'all') this.filtered = false;
+    },
+    async fetchCustomers() {
+      const res = await fetch('api/customers')
+      const data = await res.json()
+
+      return data
+    },
+    async fetchTask(id) {
+      const res = await fetch(`api/custom${id}`)
+      const data = await res.json()
+
+      return data
+    },
+
+  },
+  async created() {
+    this.customers = await this.fetchCustomers();
   }
+
 }
 </script>
 

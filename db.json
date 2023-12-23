@@ -1,0 +1,32 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "firstName": "John",
+      "lastName": "Smith",
+      "email": "info@married.com",
+      "status": "married"
+    },
+    {
+      "id": "2",
+      "firstName": "Sumatha",
+      "lastName": "Smith",
+      "email": "mary@married.com",
+      "status": "married"
+    },
+    {
+      "id": "3",
+      "firstName": "Peter",
+      "lastName": "Ens",
+      "email": "p87@buttler.com",
+      "status": "single"
+    },
+    {
+      "id": "4",
+      "firstName": "Conny",
+      "lastName": "Harper",
+      "email": "conny@harpuny.uk",
+      "status": "widow"
+    }
+  ]
+}
