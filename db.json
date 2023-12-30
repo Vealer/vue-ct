@@ -2,30 +2,59 @@
   "customers": [
     {
       "id": "1",
-      "firstName": "John",
-      "lastName": "Smith",
+      "firstName": "Matthew",
+      "lastName": "Henry",
       "email": "info@married.com",
-      "status": "married"
+      "status": "widow",
+      "phone": "01778965432"
     },
     {
       "id": "2",
-      "firstName": "Sumatha",
-      "lastName": "Smith",
+      "firstName": "Miriam",
+      "lastName": "Mücke",
       "email": "mary@married.com",
-      "status": "married"
+      "status": "married",
+      "phone": "01778965432",
+      "address": "Pechvogelstr. 25",
+      "gender": "female"
     },
     {
       "id": "3",
       "firstName": "Peter",
-      "lastName": "Ens",
+      "lastName": "Buttler",
       "email": "p87@buttler.com",
-      "status": "single"
+      "status": "single",
+      "phone": "0175852963741",
+      "gender": "male",
+      "address": "Gartenweg 12"
     },
     {
       "id": "4",
       "firstName": "Conny",
       "lastName": "Harper",
       "email": "conny@harpuny.uk",
+      "status": "widow",
+      "address": "Glückspilzweg 54",
+      "gender": "female"
+    },
+    {
+      "id": 3663,
+      "firstName": "Valer",
+      "lastName": "Neufeld",
+      "email": "info@valer-developer.de",
+      "phone": "01778965432",
+      "address": "Lindenstr. 24",
+      "gender": "male",
+      "status": "married"
+    },
+    {
+      "id": 42756,
+      "firstName": "Walter",
+      "lastName": "Farkier",
+      "email": "info@married.com",
+      "phone": "01778965432",
+      "address": "Glückspilzweg 54",
+      "gender": "male",
       "status": "widow"
     }
   ]

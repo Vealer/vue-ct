@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import CustomersComponent from '../components/Customers.vue'
-import CustomerDetails from '../components/CustomerDetails.vue'
+import Home from '../views/HomeView'
+import Detail from '../views/DetailView'
 
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('/vue-ct/'),
     routes: [
-      { path: '/', component: CustomersComponent },
-      { path: '/customer/:id', component: CustomerDetails, name: 'CustomerDetails' }
+      { path: '/', component: Home },
+      { path: '/customer/:id', component: Detail, name: 'CustomerDetails' }
     ]
   })
 

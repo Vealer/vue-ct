@@ -1,78 +1,66 @@
 <template>
-    <AddTask v-show="showAddTask" @add-task="addTask" />
-    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks" />
-    <Home></Home>
+    <Home :customers="filtered ? filteredCustomers : customers" @filter-customers="filterCustomers"></Home>
+    <Button :text="'Neue Person anlegen'" :color="'#FC6E51'" @btn-click="addCustomer"></Button>
 </template>
 
 <script>
-import AddTask from '../components/AddTask.vue';
-import Tasks from '../components/Tasks.vue';
 import Home from '../components/Customers.vue';
+import Button from '../components/Button.vue';
 
 export default {
     name: "HomeView",
-    props: {
-        showAddTask: Boolean,
-    },
     components: {
-        Tasks,
-        AddTask,
-        Home
+        Home,
+        Button
     },
     data() {
         return {
-            tasks: [],
+            customers: [],
+            "filteredCustomers": [],
+            filtered: false,
+            options: [],
         }
     },
     methods: {
-        async addTask(task) {
-            const res = await fetch('api/tasks', {
+        filterCustomers(status) {
+            this.filteredCustomers = this.customers.filter(customer => customer.status === status);
+            this.filtered = true;
+            if (status === 'all') this.filtered = false;
+        },
+        async fetchCustomers() {
+            // const res = await fetch('api/customers')
+            // const res = await fetch('https://jobs.church.tools/api/persons')
+            const res = await fetch('https://jobs.church.tools/api/persons', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer rIOWnmodkUKuOOyZ5YdoXiPi5H4MXghTKAnwlSwnU70FyseEBAPS1AzuxK1uf2Ntr6HyZhHeyJOAe5QEMYb5nAED0hgil1WL6EOWtSMnxv5YeIUOch3z46XT5ADc5lKsbZRqzPQOXuBHj6iTsbKSCmygrwynHlOetOsIhfDWpe2rRX1x77dZ9TaGOIiFZbiY9MUGbPOLFnn3IdkQazSzJVcLLD1ZZKdylvWXjbyw7aiQtWkQ3U0Ks7HIF3vEjOQZ'
+                }
+            });
+
+
+            const data = await res.json()
+            console.log(data)
+            return data
+        },
+        async addCustomer() {
+            const newCustomer = {
+                id: Math.floor(Math.random() * 100000),
+            }
+            const res = await fetch('api/customers', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(task)
-            })
-
-            const data = await res.json()
-            this.tasks = [...this.tasks, data]
-        },
-        async deleteTask(id) {
-            const res = await fetch(`api/tasks/${id}`, {
-                method: 'DELETE',
-            })
-            res.status === 200 ? (this.tasks = this.tasks.filter(t => t.id !== id))
-                : alert('Error deleting task')
-
-        },
-        async toggleReminder(id) {
-            const taskToToggle = await this.fetchTask(id)
-            const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
-            const res = await fetch(`api/tasks/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify(updTask)
+                body: JSON.stringify(newCustomer)
             })
             const data = await res.json()
-            this.tasks = this.tasks.map(t => t.id === id ? { ...t, reminder: data.reminder } : t)
-        },
-        async fetchTasks() {
-            const res = await fetch('api/tasks')
-            const data = await res.json()
-
-            return data
-        },
-        async fetchTask(id) {
-            const res = await fetch(`api/tasks${id}`)
-            const data = await res.json()
-
-            return data
+            this.customers = [...this.customers, data]
+            this.$router.push(`/customer/${newCustomer.id}`);
         },
     },
-    async created() {
-        this.tasks = await this.fetchTasks()
-    }
+    // async created() {
+    //     this.customers = await this.fetchCustomers();
+    // }
 }
 </script>

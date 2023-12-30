@@ -3,6 +3,7 @@
         <div v-for="(opt, index) in options" :key="index">
             <option :value="opt">{{ opt }}</option>
         </div>
+        <option value="married">Married</option>
         <option value="single">Single</option>
         <option value="widow">Widow</option>
         <option value="all">Alle</option>

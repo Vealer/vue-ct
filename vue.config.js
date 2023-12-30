@@ -12,5 +12,6 @@ module.exports = {
         pathRewrite: { '^/api': '/'},
       }
     }
-  }
+  },
+  publicPath: process.env.NODE_ENV === 'production' ? '/vue-ct/' : '/'
 }
